@@ -1,228 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinesh KS - Full Stack Developer</title>
-    <meta name="description" content="Dinesh KS - Full Stack Developer | Java | Spring Boot | React | JavaScript">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhinesh KS — Full Stack Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0a;
+    --surface:#141311;
+    --surface-2:#1b1916;
+    --line:#2b2823;
+    --line-soft:#211f1b;
+    --yellow:#E8B923;
+    --yellow-bright:#F6D35B;
+    --ink:#F2EFE6;
+    --ink-dim:#A9A295;
+    --ink-faint:#726B5D;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  ::selection{background:var(--yellow);color:#151300;}
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(11,11,10,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 32px;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .nav-mark{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:0.01em;
+  }
+  .nav-mark span{color:var(--yellow);}
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    color:var(--ink-dim);
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    border:1px solid var(--line);
+    padding:7px 16px;
+    border-radius:3px;
+    font-size:13.5px;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .nav-cta:hover{border-color:var(--yellow);color:var(--yellow);}
+  @media (max-width:720px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 76px;
+    border-bottom:1px solid var(--line-soft);
+    position:relative;
+  }
+  .hero-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--ink-dim);
+    font-size:14px;
+    margin-bottom:28px;
+  }
+  .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--yellow);
+    box-shadow:0 0 0 3px rgba(232,185,35,0.15);
+    flex-shrink:0;
+  }
+  h1.hero-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(42px,7vw,78px);
+    line-height:1.02;
+    margin:0 0 18px;
+    letter-spacing:-0.02em;
+    max-width:14ch;
+  }
+  .hero-role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:clamp(15px,2vw,19px);
+    color:var(--yellow);
+    margin:0 0 26px;
+  }
+  .cursor{
+    display:inline-block;
+    width:9px;height:1.1em;
+    background:var(--yellow);
+    margin-left:2px;
+    vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .hero-sub{
+    max-width:58ch;
+    color:var(--ink-dim);
+    font-size:16.5px;
+    margin:0 0 40px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-size:14.5px;
+    padding:12px 22px;
+    border-radius:3px;
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{
+    background:var(--yellow);
+    color:#171300;
+  }
+  .btn-primary:hover{background:var(--yellow-bright);}
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);}
+
+  /* status strip */
+  .status{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line-soft);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .status-item{
+    padding:20px 22px;
+    border-right:1px solid var(--line-soft);
+  }
+  .status-item:last-child{border-right:none;}
+  .status-num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:26px;
+    font-weight:600;
+    color:var(--yellow);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .status-label{
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  @media (max-width:680px){
+    .status{grid-template-columns:repeat(2,1fr);}
+    .status-item:nth-child(2){border-right:none;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{
+    padding:84px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:44px;
+    gap:20px;
+  }
+  .section-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:28px;
+    font-weight:600;
+    margin:0;
+  }
+  .section-index{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--ink-faint);
+    font-size:13px;
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:56px;
+  }
+  .about-text p{
+    color:var(--ink-dim);
+    font-size:16px;
+    max-width:62ch;
+  }
+  .about-text p+p{margin-top:16px;}
+  .edu-card{
+    border:1px solid var(--line-soft);
+    border-radius:4px;
+    padding:22px 24px;
+    background:var(--surface);
+    height:fit-content;
+  }
+  .edu-card .k{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    margin-bottom:8px;
+  }
+  .edu-card .v{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .edu-card .meta{
+    font-size:14px;
+    color:var(--ink-dim);
+  }
+  .edu-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid var(--line-soft);
+    font-size:13.5px;
+    color:var(--ink-faint);
+  }
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line-soft);
+    border:1px solid var(--line-soft);
+  }
+  .skill-cat{
+    background:var(--bg);
+    padding:26px 26px 28px;
+  }
+  .skill-cat h3{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--yellow);
+    font-weight:400;
+    margin:0 0 16px;
+  }
+  .skill-cat ul{
+    list-style:none;
+    margin:0;padding:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .skill-cat li{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:3px;
+  }
+  @media (max-width:760px){
+    .skills-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- projects timeline ---------- */
+  .timeline{
+    position:relative;
+    padding-left:32px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px;top:6px;bottom:6px;
+    width:1px;
+    background:var(--line);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:52px;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;
+    left:-32px;top:5px;
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--yellow);
+  }
+  .tl-date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    margin-bottom:8px;
+  }
+  .tl-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:21px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .tl-link{
+    font-size:13.5px;
+    color:var(--yellow);
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .tl-link:hover{color:var(--yellow-bright);}
+  .tl-list{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink-dim);
+    font-size:15px;
+    max-width:66ch;
+  }
+  .tl-list li+li{margin-top:6px;}
+
+  /* ---------- awards ---------- */
+  .award-card{
+    border:1px solid var(--line-soft);
+    border-radius:4px;
+    padding:32px;
+    background:var(--surface);
+    display:flex;
+    gap:26px;
+    align-items:flex-start;
+  }
+  .award-num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:44px;
+    font-weight:700;
+    color:var(--yellow);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .award-body h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:19px;
+    margin:0 0 8px;
+  }
+  .award-body p{
+    color:var(--ink-dim);
+    font-size:15px;
+    margin:0;
+    max-width:60ch;
+  }
+  @media (max-width:600px){
+    .award-card{flex-direction:column;gap:14px;}
+  }
+
+  /* ---------- contact / footer ---------- */
+  footer{
+    padding:76px 0 48px;
+  }
+  .contact-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(30px,5vw,46px);
+    font-weight:700;
+    margin:0 0 22px;
+    max-width:16ch;
+  }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:56px;
+  }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    border-top:1px solid var(--line-soft);
+    font-size:13.5px;
+    color:var(--ink-faint);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">DK</div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#work" class="nav-link">Work</a></li>
-                <li><a href="#skills" class="nav-link">Stack</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
+
+<header>
+  <div class="nav">
+    <div class="nav-mark">dhinesh<span>.</span>ks</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#awards">Awards</a>
     </nav>
+    <a class="nav-cta" href="mailto:ksdhinesh02@gmail.com">Say hello</a>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="highlight">Full Stack Developer</span> Building Digital Solutions
-                </h1>
-                <p class="hero-subtitle">
-                    I craft scalable backend systems and intuitive frontends. Currently focused on Java, React, and MySQL — turning complex requirements into seamless user experiences.
-                </p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                    <a href="#work" class="btn btn-secondary">View Work</a>
-                </div>
-                <div class="hero-meta">
-                    <div class="meta-item">
-                        <span class="meta-icon">📍</span>
-                        <span>Tamil Nadu, India</span>
-                    </div>
-                </div>
-            </div>
+<main class="wrap">
+
+  <section class="hero" style="border-bottom:none;">
+    <div class="hero-eyebrow"><span class="dot"></span> Available for full-time roles · Thanjavur, Tamil Nadu</div>
+    <h1 class="hero-name">Dhinesh KS</h1>
+    <p class="hero-role">full stack software engineer<span class="cursor"></span></p>
+    <p class="hero-sub">I build production web platforms that stay up under real load — attendance systems, academic portals, and admin tools serving thousands of live users on Java, PHP, Spring and React.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:ksdhinesh02@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="#projects">View projects</a>
+    </div>
+
+    <div class="status">
+      <div class="status-item">
+        <div class="status-num">2,500+</div>
+        <div class="status-label">students served live</div>
+      </div>
+      <div class="status-item">
+        <div class="status-num">300+</div>
+        <div class="status-label">active staff on the platform</div>
+      </div>
+      <div class="status-item">
+        <div class="status-num">100%</div>
+        <div class="status-label">uptime under concurrent load</div>
+      </div>
+      <div class="status-item">
+        <div class="status-num">35+</div>
+        <div class="status-label">national design awards</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2 class="section-title">About</h2>
+      <span class="section-index">01</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a full stack developer who works across the whole stack that keeps an institution running day to day — schemas, APIs, and the interface staff and students actually touch. Most of my work has come from real deployments: college portals with live attendance, exam results, and event feeds, built to hold up during peak usage rather than just in a demo.</p>
+        <p>Day to day that means Java and Spring Boot on the backend, PHP and MySQL where that's what the system was built on, and React or plain JavaScript on the front end — plus AI-assisted tools like GitHub Copilot and Cursor to move faster without cutting corners on testing or documentation.</p>
+      </div>
+      <div class="edu-card">
+        <div class="k">Education</div>
+        <div class="v">MSc Computer Science</div>
+        <div class="meta">Swami Dayananda College of Arts and Science (Bharathidasan University)</div>
+        <div class="edu-row">
+          <span>2024 – 2026</span>
+          <span>80%</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Work Section -->
-    <section class="work" id="work">
-        <div class="container">
-            <h2 class="section-title">Recent Projects</h2>
-            
-            <div class="projects-grid">
-                <!-- Project 01 -->
-                <article class="project-card">
-                    <div class="project-number">01</div>
-                    <h3 class="project-title">College Management System Staff Portal</h3>
-                    <p class="project-description">
-                        A focused staff operations platform that brings academic workflows, administration, and day-to-day campus work into one dependable system.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Java</span>
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">REST API</span>
-                    </div>
-                    <div class="project-meta">
-                        <span class="metric">300+ staff supported</span>
-                    </div>
-                    <a href="https://cms.dayalms.in" class="project-link" target="_blank" rel="noopener">
-                        Visit Project
-                        <span class="arrow">↗</span>
-                    </a>
-                </article>
+  <section id="skills">
+    <div class="section-head">
+      <h2 class="section-title">Skills</h2>
+      <span class="section-index">02</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>languages</h3>
+        <ul>
+          <li>Java</li><li>JavaScript (ES6+)</li><li>PHP</li><li>SQL</li><li>HTML5</li><li>CSS3</li><li>OOP</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>backend & apis</h3>
+        <ul>
+          <li>Spring Boot</li><li>Spring Reactive (WebFlux)</li><li>RESTful APIs</li><li>Microservices</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>frontend</h3>
+        <ul>
+          <li>React JS</li><li>Responsive UI/UX</li><li>DOM manipulation</li><li>CSS frameworks</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>data & devops</h3>
+        <ul>
+          <li>MySQL</li><li>Git</li><li>GitHub</li><li>GitLab</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>ai-assisted workflow</h3>
+        <ul>
+          <li>GitHub Copilot</li><li>Cursor</li><li>Postman</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>practices</h3>
+        <ul>
+          <li>Agile / Scrum</li><li>Code reviews</li><li>Unit & integration testing</li><li>Technical docs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-                <!-- Project 02 -->
-                <article class="project-card">
-                    <div class="project-number">02</div>
-                    <h3 class="project-title">Student Academic & Learning Portal</h3>
-                    <p class="project-description">
-                        A student-facing academic layer built for clarity at scale — helping learners access information, resources, and progress without friction.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">WebFlux</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-                    <div class="project-meta">
-                        <span class="metric">2,500+ students served</span>
-                    </div>
-                    <a href="https://dayalms.in" class="project-link" target="_blank" rel="noopener">
-                        Visit Project
-                        <span class="arrow">↗</span>
-                    </a>
-                </article>
+  <section id="projects">
+    <div class="section-head">
+      <h2 class="section-title">Projects</h2>
+      <span class="section-index">03</span>
+    </div>
+    <div class="timeline">
 
-                <!-- Project 03 -->
-                <article class="project-card">
-                    <div class="project-number">03</div>
-                    <h3 class="project-title">Official Institutional Web Platform</h3>
-                    <p class="project-description">
-                        A public digital front door for the institution: structured content, clear pathways, and an interface that carries trust from the first visit.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">PHP</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Responsive UI</span>
-                        <span class="tag">Git</span>
-                    </div>
-                    <div class="project-meta">
-                        <span class="metric">Institutional presence</span>
-                    </div>
-                    <a href="https://aascw.in" class="project-link" target="_blank" rel="noopener">
-                        Visit Project
-                        <span class="arrow">↗</span>
-                    </a>
-                </article>
-            </div>
-        </div>
-    </section>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Dec 2023 — Jun 2025</div>
+        <h3 class="tl-title">College Management System — Staff Portal</h3>
+        <a class="tl-link" href="http://cms.dayalms.in" target="_blank" rel="noopener">cms.dayalms.in ↗</a>
+        <ul class="tl-list">
+          <li>Architected an end-to-end admin platform actively supporting 300+ live staff for real-time academic management.</li>
+          <li>Designed normalized MySQL schemas and pipelines to process concurrent transactions with 100% continuous uptime.</li>
+          <li>Built secure, responsive UIs with role-based permissions and low-latency data access for 300+ active faculty.</li>
+        </ul>
+      </div>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <h2 class="section-title">Tech Stack</h2>
-            
-            <div class="skills-grid">
-                <!-- Build -->
-                <div class="skill-group">
-                    <div class="skill-header">
-                        <span class="skill-icon">⚙️</span>
-                        <h3 class="skill-title">Build</h3>
-                    </div>
-                    <ul class="skill-list">
-                        <li>Java</li>
-                        <li>JavaScript</li>
-                        <li>PHP</li>
-                        <li>React</li>
-                    </ul>
-                </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jan 2024 — Sep 2024</div>
+        <h3 class="tl-title">Student Academic & Learning Portal</h3>
+        <a class="tl-link" href="http://dayalms.in" target="_blank" rel="noopener">dayalms.in ↗</a>
+        <ul class="tl-list">
+          <li>Engineered a high-availability student portal serving 2,500+ live students with real-time attendance, exam results, and event feeds.</li>
+          <li>Built secure PHP/MySQL modules for online assignment submissions and dynamic e-learning document delivery.</li>
+          <li>Optimized database queries and backend scripts to hold low-latency response times during peak usage by 2,500+ daily users.</li>
+        </ul>
+      </div>
 
-                <!-- Backend -->
-                <div class="skill-group">
-                    <div class="skill-header">
-                        <span class="skill-icon">🔗</span>
-                        <h3 class="skill-title">Backend</h3>
-                    </div>
-                    <ul class="skill-list">
-                        <li>Spring Boot</li>
-                        <li>Spring WebFlux</li>
-                        <li>REST APIs</li>
-                    </ul>
-                </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jan 2025 — Feb 2025</div>
+        <h3 class="tl-title">Official Institutional Web Platform</h3>
+        <a class="tl-link" href="http://aascw.in" target="_blank" rel="noopener">aascw.in ↗</a>
+        <ul class="tl-list">
+          <li>Engineered the official college website with an administrative event management system for real-time announcements and news.</li>
+          <li>Delivered an accessible, responsive frontend built for cross-browser stability across desktop and mobile.</li>
+        </ul>
+      </div>
 
-                <!-- Data -->
-                <div class="skill-group">
-                    <div class="skill-header">
-                        <span class="skill-icon">📊</span>
-                        <h3 class="skill-title">Data</h3>
-                    </div>
-                    <ul class="skill-list">
-                        <li>MySQL</li>
-                        <li>Data Modelling</li>
-                        <li>Integration</li>
-                    </ul>
-                </div>
+    </div>
+  </section>
 
-                <!-- Ship -->
-                <div class="skill-group">
-                    <div class="skill-header">
-                        <span class="skill-icon">🚀</span>
-                        <h3 class="skill-title">Ship</h3>
-                    </div>
-                    <ul class="skill-list">
-                        <li>Git</li>
-                        <li>GitHub</li>
-                        <li>GitLab</li>
-                        <li>Responsive UI</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="awards" style="border-bottom:none;">
+    <div class="section-head">
+      <h2 class="section-title">Awards</h2>
+      <span class="section-index">04</span>
+    </div>
+    <div class="award-card">
+      <div class="award-num">35+</div>
+      <div class="award-body">
+        <h3>National web design excellence</h3>
+        <p>Certificates and awards across state and national-level web development and design competitions in India, including top honors in Kerala and Uttarakhand.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="contact-subtitle">
-                Open to discussing new projects, ideas, or opportunities. Feel free to reach out.
-            </p>
-            
-            <div class="contact-channels">
-                <a href="mailto:contact@dineshks.dev" class="contact-card">
-                    <span class="contact-icon">✉️</span>
-                    <span class="contact-text">Email</span>
-                </a>
-                <a href="https://linkedin.com/in/dinesh-ks" class="contact-card" target="_blank" rel="noopener">
-                    <span class="contact-icon">💼</span>
-                    <span class="contact-text">LinkedIn</span>
-                </a>
-                <a href="https://github.com/dinesh-ks" class="contact-card" target="_blank" rel="noopener">
-                    <span class="contact-icon">👨‍💻</span>
-                    <span class="contact-text">GitHub</span>
-                </a>
-                <a href="tel:+91-9876543210" class="contact-card">
-                    <span class="contact-icon">📱</span>
-                    <span class="contact-text">Phone</span>
-                </a>
-            </div>
-        </div>
-    </section>
+</main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Dinesh KS. Built with HTML & CSS.</p>
-        </div>
-    </footer>
+<footer class="wrap">
+  <h2 class="contact-title">Let's build something that stays up.</h2>
+  <div class="contact-links">
+    <a class="btn btn-primary" href="mailto:ksdhinesh02@gmail.com">ksdhinesh02@gmail.com</a>
+    <a class="btn btn-ghost" href="tel:8489107935">8489107935</a>
+  </div>
+  <div class="contact-row">
+    <span>Thanjavur, Tamil Nadu — 612103</span>
+    <span>© 2026 Dhinesh KS</span>
+  </div>
+</footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
